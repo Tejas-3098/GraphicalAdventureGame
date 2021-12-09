@@ -44,4 +44,6 @@ public interface Features {
   void startGame(String text, String text1, String text2, String text3, String text4, String text5);
 
   void quitGame();
+
+  void newGame();
 }

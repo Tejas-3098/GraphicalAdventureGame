@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
 import java.util.Objects;
 
 import javax.swing.*;
@@ -120,6 +119,7 @@ public class dungeonView extends JFrame implements dungeonI {
             numOfMonsters.getText()));
     clear.addActionListener(l -> f.clear());
     quit.addActionListener(l -> f.quitGame());
+    newGame.addActionListener(l -> f.newGame());
     restart.addActionListener(l -> f.restart(rows.getText(), columns.getText(),
             interconnectivity.getText(), wrapping.getText(), percentage.getText(),
             numOfMonsters.getText()));
@@ -155,6 +155,55 @@ public class dungeonView extends JFrame implements dungeonI {
   }
 
   @Override
+  public void createInpParaScreen() {
+    JFrame inputPara = new JFrame("Game Inputs");
+    inputPara.setSize(1000, 800);
+    inputPara.setLayout(new FlowLayout(5));
+
+
+    JLabel lblRows = new JLabel("Rows");
+    inputPara.add(lblRows);
+
+    JTextField rows = new JTextField(4);
+    rows.setText("5");
+    inputPara.add(rows);
+
+    JLabel lblCols = new JLabel("Columns");
+    inputPara.add(lblCols);
+
+    JTextField columns = new JTextField(4);
+    columns.setText("5");
+    inputPara.add(columns);
+
+    JLabel lblInt = new JLabel("Interconnectivity");
+    inputPara.add(lblInt);
+
+    JTextField interconnectivity = new JTextField(4);
+    interconnectivity.setText("8");
+    inputPara.add(interconnectivity);
+
+    JLabel lblWrap = new JLabel("Wrapping(Yes/No)");
+    inputPara.add(lblWrap);
+    JTextField wrapping = new JTextField(4);
+    wrapping.setText("no");
+    inputPara.add(wrapping);
+
+    JLabel lblPerc = new JLabel("Percentage of Caves to add Treasure");
+    inputPara.add(lblPerc);
+    JTextField percentage = new JTextField(4);
+    percentage.setText("85");
+    inputPara.add(percentage);
+
+    JLabel lblNumOfMon = new JLabel("Number of Monsters");
+    inputPara.add(lblNumOfMon);
+    JTextField numOfMonsters = new JTextField(4);
+    numOfMonsters.setText("10");
+    inputPara.add(numOfMonsters);
+
+    inputPara.setVisible(true);
+  }
+
+  @Override
   public String popDialog() {
     return JOptionPane.showInputDialog(this,
             "Enter the distance to shoot:", null);
@@ -169,6 +218,11 @@ public class dungeonView extends JFrame implements dungeonI {
   @Override
   public void makeVisible() {
     this.setVisible(true);
+  }
+
+  @Override
+  public void makeNonVisible() {
+    this.setVisible(false);
   }
 
   @Override

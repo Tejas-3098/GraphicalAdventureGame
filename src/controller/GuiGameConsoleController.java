@@ -161,6 +161,12 @@ public class GuiGameConsoleController implements GuiGameController, Features {
   }
 
   @Override
+  public void newGame() {
+    view.makeNonVisible();
+
+  }
+
+  @Override
   public void clear() {
     view.clearInputParams();
   }

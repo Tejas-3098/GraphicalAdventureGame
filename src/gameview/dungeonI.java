@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
  */
 public interface dungeonI {
 
+  void createInpParaScreen();
+
   String popDialog();
 
   void resetFocus();
@@ -19,6 +21,8 @@ public interface dungeonI {
    * after the view is constructed
    */
   void makeVisible();
+
+  void makeNonVisible();
 
   /**
    * Provide the view with an action listener for
