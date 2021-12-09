@@ -21,7 +21,7 @@ public class dungeonView extends JFrame implements dungeonI {
   private final JTextField percentage;
   private final JTextField numOfMonsters;
 
-  private final JButton enter;
+  private final JButton start;
   private final JButton clear;
   JMenuBar mb;
   JMenu m;
@@ -72,9 +72,9 @@ public class dungeonView extends JFrame implements dungeonI {
     numOfMonsters.setText("10");
     inputPara.add(numOfMonsters);
 
-    enter = new JButton("Enter");
-    enter.setActionCommand("Enter");
-    inputPara.add(enter);
+    start = new JButton("Start Game");
+    start.setActionCommand("Start Game");
+    inputPara.add(start);
 
     clear = new JButton("Clear");
     clear.setActionCommand("Clear");
@@ -115,10 +115,11 @@ public class dungeonView extends JFrame implements dungeonI {
   @Override
   public void setFeatures(Features f) {
 
-    enter.addActionListener(l -> f.enter(rows.getText(), columns.getText(),
+    start.addActionListener(l -> f.startGame(rows.getText(), columns.getText(),
             interconnectivity.getText(), wrapping.getText(), percentage.getText(),
             numOfMonsters.getText()));
     clear.addActionListener(l -> f.clear());
+    quit.addActionListener(l -> f.quitGame());
     restart.addActionListener(l -> f.restart(rows.getText(), columns.getText(),
             interconnectivity.getText(), wrapping.getText(), percentage.getText(),
             numOfMonsters.getText()));

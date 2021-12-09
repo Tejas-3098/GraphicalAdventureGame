@@ -148,7 +148,7 @@ public class GuiGameConsoleController implements GuiGameController, Features {
   }
 
   @Override
-  public void enter(String t1, String t2, String t3, String t4, String t5, String t6) {
+  public void startGame(String t1, String t2, String t3, String t4, String t5, String t6) {
     model.restartGame(Integer.parseInt(t1),Integer.parseInt(t2), Integer.parseInt(t3),
             t4, Integer.parseInt(t5), Integer.parseInt(t6));
     view.refresh();
@@ -156,10 +156,14 @@ public class GuiGameConsoleController implements GuiGameController, Features {
   }
 
   @Override
+  public void quitGame() {
+    System.exit(0);
+  }
+
+  @Override
   public void clear() {
     view.clearInputParams();
   }
-
 
   @Override
   public void playGame(Game model) throws IllegalArgumentException {

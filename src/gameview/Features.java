@@ -39,7 +39,9 @@ public interface Features {
 
   void processNumOfMons(String text);
 
-  void enter(String text, String text1, String text2, String text3, String text4, String text5);
-
   void clear();
+
+  void startGame(String text, String text1, String text2, String text3, String text4, String text5);
+
+  void quitGame();
 }
