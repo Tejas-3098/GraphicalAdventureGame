@@ -25,7 +25,7 @@ public class dungeonView extends JFrame implements dungeonI {
   private final JButton clear;
   JMenuBar mb;
   JMenu m;
-  JMenuItem restart, reset, quit;
+  JMenuItem restart, newGame, quit;
 
   public dungeonView(ReadOnlyDungeonModel dun) {
     JFrame inputPara = new JFrame("Game Inputs");
@@ -93,10 +93,10 @@ public class dungeonView extends JFrame implements dungeonI {
     mb = new JMenuBar();
     m = new JMenu("Game Settings");
     restart = new JMenuItem("Restart");
-    reset = new JMenuItem("Reset");
+    newGame = new JMenuItem("New Game");
     quit = new JMenuItem("Quit");
     m.add(restart);
-    m.add(reset);
+    m.add(newGame);
     m.add(quit);
     mb.add(m);
     this.setJMenuBar(mb);
