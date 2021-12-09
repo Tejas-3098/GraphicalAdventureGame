@@ -79,7 +79,7 @@ class DungeonPanel extends JPanel {
           int pid = dun.getPlayer().getPlayerLocId();
           //System.out.println("Player starts at :"+pid);
           Location l = dun.getPlayLocFromLocId(pid);
-          if (node[i][j].getLoc() == l) {
+          if (node[i][j].getLoc() == l && !dun.getMonsterStatus(pid)) {
             try {
               img = ImageIO.read(new File("src/dungeon-images/color-cells/player.jpg"));
             } catch (IOException e) {

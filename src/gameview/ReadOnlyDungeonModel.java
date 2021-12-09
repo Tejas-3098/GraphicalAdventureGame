@@ -31,4 +31,5 @@ public interface ReadOnlyDungeonModel {
   int getRows();
 
   int getColumns();
+
 }

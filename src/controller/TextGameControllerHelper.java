@@ -8,14 +8,16 @@ import dungeon.Directions;
 import dungeon.Game;
 
 /**
- * Helper class for the controller.
+ * Helper class for the controller which contains the helper methods to move the player,
+ * pick up treasure and arrows and shoot arrows.
  */
 public class TextGameControllerHelper {
 
   private final Appendable out;
 
   /**
-   * Constructor for the helper class.
+   * Constructor for the helper class which takes in Readable and Appendable as parameters
+   * which are first null validated.
    */
   public TextGameControllerHelper(Readable in, Appendable out) {
 
