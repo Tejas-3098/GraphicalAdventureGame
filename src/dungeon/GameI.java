@@ -1,8 +1,7 @@
 package dungeon;
 
-import java.util.ArrayList;
-
 import gameview.ReadOnlyDungeonModel;
+import java.util.ArrayList;
 
 /**
  * Game interface which contains methods related to Dungeon and Player both like createGameDungeon,

@@ -24,8 +24,8 @@ public class Node {
    * Constructor for DNode which takes in the parameter of location of the node in the dungeon.
    */
   public Node(Location loc) {
-    if (loc.getX() == 0 && loc.getY()==0) {
-      ID=0;
+    if (loc.getX() == 0 && loc.getY() == 0) {
+      ID = 0;
     }
     this.locId = ++ID;
     this.loc = loc;

@@ -1,8 +1,7 @@
 package gameview;
 
-import java.awt.event.ActionListener;
-
 import controller.GuiGameConsoleController;
+import java.awt.event.ActionListener;
 
 /**
  * The view interface for the dungeon. To motivate the methods here
@@ -11,7 +10,7 @@ import controller.GuiGameConsoleController;
  */
 public interface dungeonI {
 
-  String popup();
+  String popDialog();
 
   void resetFocus();
 
@@ -26,6 +25,7 @@ public interface dungeonI {
    * the button that should cause the program to
    * process a command. This is so that when the button
    * is pressed, control goes to the action listener
+   *
    * @param actionEvent
    */
   void setCommandButtonListener(ActionListener actionEvent);

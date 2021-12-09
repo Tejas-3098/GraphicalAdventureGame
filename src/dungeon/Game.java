@@ -8,12 +8,6 @@ import java.util.ArrayList;
  */
 public class Game implements GameI {
 
-  private int rows;
-  private int columns;
-  private int interconnectivity;
-  private String wrapping;
-  private int perc;
-  private int numOfMons;
   private Dungeon dungeon2D;
   private Player play;
   private int startCaveLocId;
@@ -41,14 +35,15 @@ public class Game implements GameI {
     startGame();
     System.out.println("Start Cave -> " + startCaveLocId + " End Cave -> " + endCaveLocId);
     assignMonsterToGame(dungeon2D.getNumberOfMonsters(), startCaveLocId, endCaveLocId);
-    for(int i=0;i<getRows();i++) {
-      for(int j=0;j<columns;j++) {
+    for (int i = 0; i < getRows(); i++) {
+      for (int j = 0; j < columns; j++) {
         System.out.println(dungeon2D.get2dDungeon()[i][j].getMonster());
       }
     }
 
     return dungeon2D.get2dDungeon();
   }
+
   @Override
   public Node[][] restartGame(int rows, int columns, int interconnectivity,
                               String wrapping, int perc, int n) {
@@ -58,10 +53,9 @@ public class Game implements GameI {
 
     //setStartAndEndCaveToTestIt(12, 1);
     startGame();
-    //System.out.println("Start Cave -> " + startCaveLocId + " End Cave -> " + endCaveLocId);
     assignMonsterToGame(dungeon2D.getNumberOfMonsters(), startCaveLocId, endCaveLocId);
-    for(int i=0;i<getRows();i++) {
-      for(int j=0;j<columns;j++) {
+    for (int i = 0; i < getRows(); i++) {
+      for (int j = 0; j < columns; j++) {
         System.out.println(dungeon2D.get2dDungeon()[i][j].getMonster());
       }
     }
@@ -71,8 +65,9 @@ public class Game implements GameI {
 
   @Override
   public void setRows(String s) {
-    this.rows = Integer.parseInt(s);
+    int rows = Integer.parseInt(s);
   }
+
   @Override
   public void assignGameTreasure(int perc) {
     dungeon2D.assignTreasure(perc);
@@ -115,14 +110,20 @@ public class Game implements GameI {
 
     if (a % dungeon2D.getRows() == 0) {
       if (dungeon2D.getWrappingStatus() && adjacents.contains(a - dungeon2D.getRows() + 1)) {
-        dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a);
+        int visLocId = a - dungeon2D.getRows() + 1;
+        Location l = dungeon2D.getLocFromLocId(a - dungeon2D.getRows() + 1);
+        dungeon2D.get2dDungeon()[l.getX()][l.getY()].setVisited(visLocId);
+        //dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a);
         play.setPlayerLocId(a - dungeon2D.getRows() + 1);
         play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(a - dungeon2D.getRows() + 1));
         moveRes = "Player has moved east to Node " + (a - dungeon2D.getRows() + 1);
 
       }
     } else if (adjacents.contains(a + 1)) {
-      dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a + 1);
+      int visLocId = a + 1;
+      Location l1 = dungeon2D.getLocFromLocId(a+1);
+      dungeon2D.get2dDungeon()[l1.getX()][l1.getY()].setVisited(visLocId);
+      //dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a + 1);
       play.setPlayerLocId(a + 1);
       play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(a + 1));
       moveRes = "Player has moved east to Node " + (a + 1);
@@ -137,7 +138,6 @@ public class Game implements GameI {
     String moveRes = "Player cannot move west as there is no path towards west."
             + " Please choose some other direction!";
     Location currLocOfPlayer = play.getPlayerCoordinates();
-    //Node n = new Node(currLocOfPlayer);
     ArrayList<Integer> adjacents = dungeon2D.get2dDungeon()
             [currLocOfPlayer.getX()][currLocOfPlayer.getY()].getAdjacents();
     int a = dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].getLocId();
@@ -150,13 +150,19 @@ public class Game implements GameI {
     if (a % dungeon2D.getRows() == 1) {
       if (dungeon2D.getWrappingStatus()
               && adjacents.contains(dungeon2D.getRows())) {
-        dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a);
+        int visLocId = dungeon2D.getRows();
+        Location l = dungeon2D.getLocFromLocId(visLocId);
+        dungeon2D.get2dDungeon()[l.getX()][l.getY()].setVisited(visLocId);
+        //dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a);
         play.setPlayerLocId(dungeon2D.getRows());
         play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(dungeon2D.getRows()));
         moveRes = "Player has moved west to Node " + (dungeon2D.getRows());
       }
     } else if (adjacents.contains(a - 1)) {
-      dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a - 1);
+      int visLocId = a - 1;
+      Location l1 = dungeon2D.getLocFromLocId(visLocId);
+      dungeon2D.get2dDungeon()[l1.getX()][l1.getY()].setVisited(visLocId);
+      //dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a - 1);
       play.setPlayerLocId(a - 1);
       play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(a - 1));
       moveRes = "Player has moved west to Node " + (a - 1);
@@ -169,7 +175,6 @@ public class Game implements GameI {
     String moveRes = "Player cannot move north as there is no path towards north."
             + " Please choose some other direction!";
     Location currLocOfPlayer = play.getPlayerCoordinates();
-    //Node n = new Node(currLocOfPlayer);
     ArrayList<Integer> adjacents = dungeon2D.get2dDungeon()
             [currLocOfPlayer.getX()][currLocOfPlayer.getY()].getAdjacents();
     int a = dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].getLocId();
@@ -177,25 +182,27 @@ public class Game implements GameI {
     if (currLocOfPlayer == endCaveCoordinates) {
       moveRes = "Cannot move Player as he has already reached the destination!";
     }
-    //if the dungeon is wrapping and player wants to move west
+    //if the dungeon is wrapping and player wants to move north
 
     if (a % dungeon2D.getColumns() == 0) {
       if (dungeon2D.getWrappingStatus()
               && adjacents.contains(dungeon2D.getRows() * dungeon2D.getColumns())) {
-        int b = dungeon2D.getRows() * dungeon2D.getColumns();
-        dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(b);
+        int visLocId = dungeon2D.getRows() * dungeon2D.getColumns();
+        Location l = dungeon2D.getLocFromLocId(visLocId);
+        dungeon2D.get2dDungeon()[l.getX()][l.getY()].setVisited(visLocId);
         play.setPlayerLocId(dungeon2D.getRows() * dungeon2D.getColumns());
         play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(dungeon2D.getRows()
                 * dungeon2D.getColumns()));
 
-        moveRes = "Player has moved north to Node " + b;
+        moveRes = "Player has moved north to Node " + visLocId;
       }
     } else if (adjacents.contains(a - dungeon2D.getColumns())) {
-      int b = a - dungeon2D.getColumns();
-      dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(b);
+      int visLocId = a - dungeon2D.getColumns();
+      Location l1 = dungeon2D.getLocFromLocId(visLocId);
+      dungeon2D.get2dDungeon()[l1.getX()][l1.getY()].setVisited(visLocId);
       play.setPlayerLocId(a - dungeon2D.getColumns());
       play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(a - dungeon2D.getColumns()));
-      moveRes = "Player has moved north to Node " + b;
+      moveRes = "Player has moved north to Node " + visLocId;
     }
     return moveRes;
   }
@@ -205,7 +212,6 @@ public class Game implements GameI {
     String moveRes = "Player cannot move south as there is no path towards south."
             + " Please choose some other direction!";
     Location currLocOfPlayer = play.getPlayerCoordinates();
-    //Node n = new Node(currLocOfPlayer);
     ArrayList<Integer> adjacents = dungeon2D.get2dDungeon()
             [currLocOfPlayer.getX()][currLocOfPlayer.getY()].getAdjacents();
     int a = dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].getLocId();
@@ -218,18 +224,20 @@ public class Game implements GameI {
     if (a % (dungeon2D.getRows() * dungeon2D.getColumns()) == 0) {
       if (dungeon2D.getWrappingStatus()
               && adjacents.contains(a % dungeon2D.getColumns())) {
-        int b = a % dungeon2D.getColumns();
-        dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(b);
+        int visLocId = a % dungeon2D.getColumns();
+        Location l = dungeon2D.getLocFromLocId(visLocId);
+        dungeon2D.get2dDungeon()[l.getX()][l.getY()].setVisited(visLocId);
         play.setPlayerLocId(a % dungeon2D.getColumns());
         play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(a % dungeon2D.getColumns()));
-        moveRes = "Player has moved south to Node " + b;
+        moveRes = "Player has moved south to Node " + visLocId;
       }
     } else if (adjacents.contains(a + dungeon2D.getColumns())) {
-      int b = (a + dungeon2D.getColumns());
-      dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(b);
+      int visLocId = (a + dungeon2D.getColumns());
+      Location l1 = dungeon2D.getLocFromLocId(visLocId);
+      dungeon2D.get2dDungeon()[l1.getX()][l1.getY()].setVisited(visLocId);
       play.setPlayerLocId(a + dungeon2D.getColumns());
       play.setCoordinatesOfPlayer(dungeon2D.getLocFromLocId(a + dungeon2D.getColumns()));
-      moveRes = "Player has moved north to Node " + b;
+      moveRes = "Player has moved north to Node " + visLocId;
 
     }
     return moveRes;
@@ -414,7 +422,7 @@ public class Game implements GameI {
       Location lastOfLocationOfArrow = dungeon2D.getLocFromLocId(lastLocationIdOfArrow);
       if (arrowDistSoFar == dist && !dungeon2D.get2dDungeon()[lastOfLocationOfArrow.getX()]
               [lastOfLocationOfArrow.getY()].getMonster().isEmpty()
-              ) {
+      ) {
         dungeon2D.get2dDungeon()[lastOfLocationOfArrow.getX()]
                 [lastOfLocationOfArrow.getY()].getMonster().get(0).decrementHealth();
         int monHealth = dungeon2D.get2dDungeon()[lastOfLocationOfArrow.getX()]
@@ -474,27 +482,26 @@ public class Game implements GameI {
 
   @Override
   public void setCols(String text) {
-    this.columns = Integer.parseInt(text);
+    int columns = Integer.parseInt(text);
   }
 
   @Override
   public void setInt(String s) {
-    this.interconnectivity = Integer.parseInt(s);
+    int interconnectivity = Integer.parseInt(s);
   }
 
   @Override
   public void setWrapping(String s) {
-    this.wrapping = s;
   }
 
   @Override
   public void setPerc(String s) {
-    this.perc = Integer.parseInt(s);
+    int perc = Integer.parseInt(s);
   }
 
   @Override
   public void setNumOfMon(String s) {
-    this.numOfMons = Integer.parseInt(s);
+    int numOfMons = Integer.parseInt(s);
   }
 }
 

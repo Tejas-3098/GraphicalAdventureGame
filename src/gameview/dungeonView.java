@@ -12,7 +12,6 @@ import javax.swing.*;
 import controller.GuiGameConsoleController;
 
 public class dungeonView extends JFrame implements dungeonI {
-  private final DungeonPanel dPanel;
   //static JFrame f;
   private final JTextField rows;
   private final JTextField columns;
@@ -20,12 +19,9 @@ public class dungeonView extends JFrame implements dungeonI {
   private final JTextField wrapping;
   private final JTextField percentage;
   private final JTextField numOfMonsters;
-  private JLabel lblInt;
-  private JLabel lblWrap;
-  private JLabel lblPerc;
-  private JLabel lblNumOfMon;
 
-  private JButton enter, clear;
+  private final JButton enter;
+  private final JButton clear;
   JMenuBar mb;
   JMenu m;
   JMenuItem restart, reset, quit;
@@ -50,26 +46,26 @@ public class dungeonView extends JFrame implements dungeonI {
     columns.setText("5");
     inputPara.add(columns);
 
-    lblInt = new JLabel("Interconnectivity");
+    JLabel lblInt = new JLabel("Interconnectivity");
     inputPara.add(lblInt);
 
     interconnectivity = new JTextField(4);
     interconnectivity.setText("8");
     inputPara.add(interconnectivity);
 
-    lblWrap = new JLabel("Wrapping(Yes/No)");
+    JLabel lblWrap = new JLabel("Wrapping(Yes/No)");
     inputPara.add(lblWrap);
     wrapping = new JTextField(4);
     wrapping.setText("no");
     inputPara.add(wrapping);
 
-    lblPerc = new JLabel("Percentage of Caves to add Treasure");
+    JLabel lblPerc = new JLabel("Percentage of Caves to add Treasure");
     inputPara.add(lblPerc);
     percentage = new JTextField(4);
     percentage.setText("85");
     inputPara.add(percentage);
 
-    lblNumOfMon = new JLabel("Number of Monsters");
+    JLabel lblNumOfMon = new JLabel("Number of Monsters");
     inputPara.add(lblNumOfMon);
     numOfMonsters = new JTextField(4);
     numOfMonsters.setText("10");
@@ -90,7 +86,7 @@ public class dungeonView extends JFrame implements dungeonI {
     this.setTitle("Conquer the Maze Game!");
     //super("Conquer the Maze Game!");
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.setSize(new Dimension(500, 500));
+    this.setSize(new Dimension(1000, 700));
 
 
     mb = new JMenuBar();
@@ -103,36 +99,21 @@ public class dungeonView extends JFrame implements dungeonI {
     m.add(quit);
     mb.add(m);
     this.setJMenuBar(mb);
-    dPanel = new DungeonPanel(dun);
+    DungeonPanel dPanel = new DungeonPanel(dun);
     this.add(dPanel);
-    //JScrollPane scPane = new JScrollPane(dPanel);
-    //scPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    //scPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    //scPane.setPreferredSize(new Dimension(1400, 1000));
-    //scPane.setVisible(true);
-    //this.getContentPane().add(scPane);
+    JScrollPane scPane = new JScrollPane(dPanel);
+    scPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    scPane.setPreferredSize(new Dimension(1400, 1000));
+    scPane.setVisible(true);
+    this.getContentPane().add(scPane);
     //makeVisible();
   }
 
 
   @Override
   public void setFeatures(Features f) {
-    /*
-    // exit program is tied to the exit button
-    exitButton.addActionListener(l -> f.exitProgram());
-    // toggle color is tied to a toggle button. Originally this functionality
-    // was
-    // exposed only by a key press. Having a set of callbacks to call gives
-    // the view full control over which UI elements to map to which features.
-    toggleButton.addActionListener(l -> f.toggleColor());
 
-     */
-    //enter.addActionListener(l -> f.processRows(rows.getText()));
-    //enter.addActionListener(l -> f.processCols(columns.getText()));
-    //enter.addActionListener(l -> f.processInt(interconnectivity.getText()));
-    //enter.addActionListener(l -> f.processWrap(wrapping.getText()));
-    //enter.addActionListener(l -> f.processPerc(percentage.getText()));
-    //enter.addActionListener(l -> f.processNumOfMons(numOfMonsters.getText()));
     enter.addActionListener(l -> f.enter(rows.getText(), columns.getText(),
             interconnectivity.getText(), wrapping.getText(), percentage.getText(),
             numOfMonsters.getText()));
@@ -156,7 +137,7 @@ public class dungeonView extends JFrame implements dungeonI {
           f.pickup(e);
         } else if (e.getKeyCode() == 'W' || e.getKeyCode() == 'A' || e.getKeyCode() == 'S'
                 || e.getKeyCode() == 'D') {
-          int d = Integer.parseInt(popup());
+          int d = Integer.parseInt(popDialog());
           f.shoot(e, d);
         }
       }
@@ -172,10 +153,9 @@ public class dungeonView extends JFrame implements dungeonI {
   }
 
   @Override
-  public String popup() {
-    String ip = JOptionPane.showInputDialog(this,
+  public String popDialog() {
+    return JOptionPane.showInputDialog(this,
             "Enter the distance to shoot:", null);
-    return ip;
   }
 
   @Override
@@ -217,10 +197,12 @@ public class dungeonView extends JFrame implements dungeonI {
   public void showResult(String s) {
     if (Objects.equals(s, "monster")) {
       JOptionPane.showMessageDialog(this,"Chomp Chomp Chomp," +
-              " you are eaten by an Otyugh!");
+              " you are eaten by an Otyugh! Please go to game settings" +
+              " and click on Restart to start a new game!");
     }
     else if (Objects.equals(s, "player")) {
-      JOptionPane.showMessageDialog(this,"Congrats! You have won the game!");
+      JOptionPane.showMessageDialog(this,"Congrats! You have won the game! " +
+              "Please go to game settings and click on Restart to start a new game!");
     }
   }
 

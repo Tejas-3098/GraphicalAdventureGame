@@ -60,7 +60,8 @@ public class GuiGameConsoleController implements GuiGameController, Features {
       if (!model.getPlayer().isPlayerAlive(model)) {
         view.showResult("monster");
       }
-      if (model.getPlayer().getPlayerLocId() == model.getEndCaveLocId()) {
+      if (model.getPlayer().getPlayerLocId() == model.getEndCaveLocId()
+              && model.getPlayer().isPlayerAlive(model)) {
         view.showResult("player");
       }
       view.refresh();
@@ -164,13 +165,9 @@ public class GuiGameConsoleController implements GuiGameController, Features {
   public void playGame(Game model) throws IllegalArgumentException {
     while(!model.isGameOver()) {
       view.addClickListener(this);
-      //view.addKeyListener(this);
 
     }
 
-
-
   }
-
 
 }

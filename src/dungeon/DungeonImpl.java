@@ -232,11 +232,8 @@ public class DungeonImpl implements Dungeon {
 
   @Override
   public Location getLocFromLocId(int locId) {
-//    System.out.println(locId);
     for (int i = 0; i < this.rows; i++) {
       for (int j = 0; j < this.columns; j++) {
-//        System.out.println("loc id"+ this.dungeon2D[i][j].getLocId());
-//        System.out.println(i+" "+j);
         if (this.dungeon2D[i][j].getLocId() == locId) {
           return this.dungeon2D[i][j].getLoc();
         }
@@ -394,8 +391,8 @@ public class DungeonImpl implements Dungeon {
   private void assignMonsterToCaves(int numberOfCavesToBeAddedWithMonster,
                                     int startCaveLocId, int endCaveLocId) {
     ArrayList<Integer> setOfNodes = new ArrayList<>();
-    for (int i = 0; i < rows ; i++) {
-      for (int j=0;j<columns;j++) {
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < columns; j++) {
         setOfNodes.add(dungeon2D[i][j].getLocId());
       }
     }
@@ -426,10 +423,7 @@ public class DungeonImpl implements Dungeon {
         this.dungeon2D[locRan.getX()][locRan.getY()].addMonster(m);
         this.dungeon2D[locRan.getX()][locRan.getY()].getMonster().remove(0);
         cavesAssigned++;
-      }// else {
-        //this.dungeon2D[locRan.getX()][locRan.getY()].addMonster(null);
-      //}
-
+      }
     }
   }
 
@@ -484,8 +478,10 @@ public class DungeonImpl implements Dungeon {
     int y = l.getY();
     if (dungeon2D[x][y].getLocType() == LocationType.TUNNEL) {
       return false;
-    } else return dungeon2D[x][y].getLocType() == LocationType.CAVE
-            && dungeon2D[x][y].getMonster().get(0)!=null;
+    } else {
+      return dungeon2D[x][y].getLocType() == LocationType.CAVE
+              && dungeon2D[x][y].getMonster().get(0) != null;
+    }
   }
 
   @Override
@@ -519,8 +515,8 @@ public class DungeonImpl implements Dungeon {
   @Override
   public String toString() {
     String d = "";
-    for (int i=0;i<rows; i++) {
-      for ( int j=0;j<columns;j++) {
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < columns; j++) {
         d = d + dungeon2D[i][j].toString() + " ";
       }
       d = d + "\n";

@@ -59,17 +59,14 @@ class DungeonPanel extends JPanel {
     for (int i = 0; i < dun.getRows(); i++) {
       x = 20;
       for (int j = 0; j < dun.getColumns(); j++) {
-        //System.out.println(i+","+j+" --- "+node[i][j].getVisitedStatus());
-        //System.out.println(node[i][j].getLocMove());
         if (!node[i][j].getVisitedStatus()) {
           try {
             img = ImageIO.read(new File("src/dungeon-images/blank.png"));
           } catch (IOException e) {
             e.printStackTrace();
           }
-          g2d.drawImage(img, x, y,120,120, this);
-        }
-        else {
+          g2d.drawImage(img, x, y, 120, 120, this);
+        } else {
           String imageToDraw = images.get(node[i][j].getLocMove());
           try {
             img = ImageIO.read(new File(imageToDraw));
@@ -108,7 +105,9 @@ class DungeonPanel extends JPanel {
           } else if (node[i][j].getLocType() == LocationType.CAVE && node[i][j].getLoc() == l) {
             g2d.drawString("Location Type: CAVE", 10, 80);
           }
-          if (dun.getMonsterStatus(node[i][j].getLocId()) && node[i][j].getLoc() == l) {
+          if (dun.getMonsterStatus(node[i][j].getLocId())
+                  && node[i][j].getMonster().get(0).getHealth() != 0
+                  && node[i][j].getLoc() == l) {
             g2d.drawString("Monster : PRESENT! You're about to be eaten!", 200, 80);
           } else if (!dun.getMonsterStatus(node[i][j].getLocId()) && node[i][j].getLoc() == l) {
             g2d.drawString("Monster : NOT PRESENT! You're safe for now!", 200, 80);
@@ -163,14 +162,16 @@ class DungeonPanel extends JPanel {
 
           if (dun.getSmell() == 1 && node[i][j].getLoc() == l) {
             try {
-              img = ImageIO.read(new File("src/dungeon-images/color-cells/smellPungent.jfif"));
+              img = ImageIO.read(new File("src/dungeon-images/" +
+                      "color-cells/smellPungent.jfif"));
             } catch (IOException e) {
               e.printStackTrace();
             }
             g2d.drawImage(img, x + 55, y + 55, 30, 30, this);
           } else if (dun.getSmell() == 2 && node[i][j].getLoc() == l) {
             try {
-              img = ImageIO.read(new File("src/dungeon-images/color-cells/smellFaint.jfif"));
+              img = ImageIO.read(new File("src/dungeon-images/color-cells/" +
+                      "smellFaint.jfif"));
             } catch (IOException e) {
               e.printStackTrace();
             }

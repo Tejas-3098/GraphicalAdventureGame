@@ -1,6 +1,6 @@
 package dungeon;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Player interface which contains getter methods for location ID, co-ordinates of the player,
@@ -19,7 +19,7 @@ public interface Player {
 
   void setPlayerLocId(int nextLocation);
 
-  ArrayList<TreasureI> getTreasurePicked();
+  List<TreasureI> getTreasurePicked();
 
   Location getPlayerCoordinates();
 

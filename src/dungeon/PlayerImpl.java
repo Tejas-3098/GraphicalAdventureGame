@@ -1,6 +1,7 @@
 package dungeon;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -10,10 +11,9 @@ import java.util.Objects;
  */
 public class PlayerImpl implements Player {
 
-  private ArrayList<TreasureI> treasurePicked;
+  private final ArrayList<TreasureI> treasurePicked;
   private Location coordinatesOfPlayer;
   private int playerLocId;
-  private int smellIntensity = 0;
   private int arrowsEquipped;
 
   /**
@@ -27,7 +27,7 @@ public class PlayerImpl implements Player {
   }
 
   @Override
-  public ArrayList<TreasureI> getTreasurePicked() {
+  public List<TreasureI> getTreasurePicked() {
     return this.treasurePicked;
   }
 
@@ -92,6 +92,7 @@ public class PlayerImpl implements Player {
   public void decrementArrow() {
     this.arrowsEquipped -= 1;
   }
+
   @Override
   public boolean isPlayerAlive(Game g) {
     boolean alive = true;
