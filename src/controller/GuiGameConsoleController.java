@@ -38,24 +38,31 @@ public class GuiGameConsoleController implements GuiGameController, Features {
 
   @Override
   public void move(KeyEvent k) {
-    if (k.getKeyCode() == KeyEvent.VK_UP) {
-      System.out.println("Player moved North!");
-      model.movePlayerNorth();
-      view.refresh();
-    }
-    else if (k.getKeyCode() == KeyEvent.VK_DOWN) {
-      model.movePlayerSouth();
-      System.out.println("Player moved S!");
-      view.refresh();
-    }
-    else if (k.getKeyCode() == KeyEvent.VK_LEFT) {
-      model.movePlayerWest();
-      System.out.println("Player moved W!");
-      view.refresh();
-    }
-    else if (k.getKeyCode() == KeyEvent.VK_RIGHT) {
-      model.movePlayerEast();
-      System.out.println("Player moved E!");
+    if(!model.isGameOver()) {
+      if (k.getKeyCode() == KeyEvent.VK_UP) {
+        System.out.println("Player moved North!");
+        model.movePlayerNorth();
+
+      } else if (k.getKeyCode() == KeyEvent.VK_DOWN) {
+        model.movePlayerSouth();
+
+        System.out.println("Player moved S!");
+
+      } else if (k.getKeyCode() == KeyEvent.VK_LEFT) {
+        model.movePlayerWest();
+
+        System.out.println("Player moved W!");
+      } else if (k.getKeyCode() == KeyEvent.VK_RIGHT) {
+        model.movePlayerEast();
+
+        System.out.println("Player moved E!");
+      }
+      if (!model.getPlayer().isPlayerAlive(model)) {
+        view.showResult("monster");
+      }
+      if (model.getPlayer().getPlayerLocId() == model.getEndCaveLocId()) {
+        view.showResult("player");
+      }
       view.refresh();
     }
   }
@@ -102,8 +109,11 @@ public class GuiGameConsoleController implements GuiGameController, Features {
   }
 
   @Override
-  public void restart() {
-
+  public void restart(String t1, String t2, String t3, String t4, String t5, String t6) {
+    model.restartGame(Integer.parseInt(t1),Integer.parseInt(t2), Integer.parseInt(t3),
+            t4, Integer.parseInt(t5), Integer.parseInt(t6));
+    view.refresh();
+    view.makeVisible();
   }
 
   @Override
@@ -141,7 +151,12 @@ public class GuiGameConsoleController implements GuiGameController, Features {
     model.restartGame(Integer.parseInt(t1),Integer.parseInt(t2), Integer.parseInt(t3),
             t4, Integer.parseInt(t5), Integer.parseInt(t6));
     view.refresh();
-    //view.makeVisible();
+    view.makeVisible();
+  }
+
+  @Override
+  public void clear() {
+    view.clearInputParams();
   }
 
 
@@ -150,8 +165,9 @@ public class GuiGameConsoleController implements GuiGameController, Features {
     while(!model.isGameOver()) {
       view.addClickListener(this);
       //view.addKeyListener(this);
-      //view.makeVisible();
+
     }
+
 
 
   }

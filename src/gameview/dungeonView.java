@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
+import java.util.Objects;
 
 import javax.swing.*;
 
@@ -13,8 +14,16 @@ import controller.GuiGameConsoleController;
 public class dungeonView extends JFrame implements dungeonI {
   private final DungeonPanel dPanel;
   //static JFrame f;
-  private JTextField rows, columns, interconnectivity, wrapping, percentage, numOfMonsters;
-  private JLabel lblRows, lblCols, lblInt, lblWrap, lblPerc, lblNumOfMon;
+  private final JTextField rows;
+  private final JTextField columns;
+  private final JTextField interconnectivity;
+  private final JTextField wrapping;
+  private final JTextField percentage;
+  private final JTextField numOfMonsters;
+  private JLabel lblInt;
+  private JLabel lblWrap;
+  private JLabel lblPerc;
+  private JLabel lblNumOfMon;
 
   private JButton enter, clear;
   JMenuBar mb;
@@ -23,48 +32,54 @@ public class dungeonView extends JFrame implements dungeonI {
 
   public dungeonView(ReadOnlyDungeonModel dun) {
     JFrame inputPara = new JFrame("Game Inputs");
-    inputPara.setSize(1000, 500);
+    inputPara.setSize(1000, 800);
     inputPara.setLayout(new FlowLayout(5));
 
 
-    lblRows = new JLabel("Rows");
+    JLabel lblRows = new JLabel("Rows");
     inputPara.add(lblRows);
 
     rows = new JTextField(4);
+    rows.setText("5");
     inputPara.add(rows);
 
-    lblCols = new JLabel("Columns");
+    JLabel lblCols = new JLabel("Columns");
     inputPara.add(lblCols);
 
     columns = new JTextField(4);
+    columns.setText("5");
     inputPara.add(columns);
 
     lblInt = new JLabel("Interconnectivity");
     inputPara.add(lblInt);
 
     interconnectivity = new JTextField(4);
+    interconnectivity.setText("8");
     inputPara.add(interconnectivity);
 
     lblWrap = new JLabel("Wrapping(Yes/No)");
     inputPara.add(lblWrap);
     wrapping = new JTextField(4);
+    wrapping.setText("no");
     inputPara.add(wrapping);
 
     lblPerc = new JLabel("Percentage of Caves to add Treasure");
     inputPara.add(lblPerc);
     percentage = new JTextField(4);
+    percentage.setText("85");
     inputPara.add(percentage);
 
     lblNumOfMon = new JLabel("Number of Monsters");
     inputPara.add(lblNumOfMon);
     numOfMonsters = new JTextField(4);
+    numOfMonsters.setText("10");
     inputPara.add(numOfMonsters);
 
     enter = new JButton("Enter");
     enter.setActionCommand("Enter");
     inputPara.add(enter);
 
-    clear = new JButton("clear");
+    clear = new JButton("Clear");
     clear.setActionCommand("Clear");
     inputPara.add(clear);
 
@@ -96,7 +111,7 @@ public class dungeonView extends JFrame implements dungeonI {
     //scPane.setPreferredSize(new Dimension(1400, 1000));
     //scPane.setVisible(true);
     //this.getContentPane().add(scPane);
-    makeVisible();
+    //makeVisible();
   }
 
 
@@ -121,7 +136,10 @@ public class dungeonView extends JFrame implements dungeonI {
     enter.addActionListener(l -> f.enter(rows.getText(), columns.getText(),
             interconnectivity.getText(), wrapping.getText(), percentage.getText(),
             numOfMonsters.getText()));
-    restart.addActionListener(l -> f.restart() );
+    clear.addActionListener(l -> f.clear());
+    restart.addActionListener(l -> f.restart(rows.getText(), columns.getText(),
+            interconnectivity.getText(), wrapping.getText(), percentage.getText(),
+            numOfMonsters.getText()));
     this.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {
@@ -130,6 +148,7 @@ public class dungeonView extends JFrame implements dungeonI {
 
       @Override
       public void keyPressed(KeyEvent e) {
+
         if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_LEFT
                 || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_UP) {
           f.move(e);
@@ -182,6 +201,27 @@ public class dungeonView extends JFrame implements dungeonI {
 
   @Override
   public void addClickListener(GuiGameConsoleController guiGameConsoleController) {
+  }
+
+  @Override
+  public void clearInputParams() {
+    rows.setText("");
+    columns.setText("");
+    interconnectivity.setText("");
+    wrapping.setText("");
+    percentage.setText("");
+    numOfMonsters.setText("");
+  }
+
+  @Override
+  public void showResult(String s) {
+    if (Objects.equals(s, "monster")) {
+      JOptionPane.showMessageDialog(this,"Chomp Chomp Chomp," +
+              " you are eaten by an Otyugh!");
+    }
+    else if (Objects.equals(s, "player")) {
+      JOptionPane.showMessageDialog(this,"Congrats! You have won the game!");
+    }
   }
 
 }

@@ -38,4 +38,8 @@ public interface dungeonI {
   void addClickListener(GuiGameConsoleController guiGameConsoleController);
 
   void setFeatures(Features f);
+
+  void clearInputParams();
+
+  void showResult(String monster);
 }

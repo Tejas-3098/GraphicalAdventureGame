@@ -58,7 +58,7 @@ public class Game implements GameI {
 
     //setStartAndEndCaveToTestIt(12, 1);
     startGame();
-    System.out.println("Start Cave -> " + startCaveLocId + " End Cave -> " + endCaveLocId);
+    //System.out.println("Start Cave -> " + startCaveLocId + " End Cave -> " + endCaveLocId);
     assignMonsterToGame(dungeon2D.getNumberOfMonsters(), startCaveLocId, endCaveLocId);
     for(int i=0;i<getRows();i++) {
       for(int j=0;j<columns;j++) {

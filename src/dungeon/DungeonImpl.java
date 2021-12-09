@@ -232,8 +232,11 @@ public class DungeonImpl implements Dungeon {
 
   @Override
   public Location getLocFromLocId(int locId) {
+//    System.out.println(locId);
     for (int i = 0; i < this.rows; i++) {
       for (int j = 0; j < this.columns; j++) {
+//        System.out.println("loc id"+ this.dungeon2D[i][j].getLocId());
+//        System.out.println(i+" "+j);
         if (this.dungeon2D[i][j].getLocId() == locId) {
           return this.dungeon2D[i][j].getLoc();
         }
@@ -332,6 +335,7 @@ public class DungeonImpl implements Dungeon {
   @Override
   public void assignTreasure(int perc) throws IllegalArgumentException {
     //throwing an exception if the percentage is not a valid value
+    System.out.println(perc);
     if (perc > 100 || perc < 0) {
       throw new IllegalArgumentException("Percentage should be between 0 and 100");
     }
@@ -350,6 +354,7 @@ public class DungeonImpl implements Dungeon {
     while (cavesAssigned != numberOfCavesToBeAddedWithTreasure) {
       //int ranNode = setOfDNodes.remove(0); // Will be randomized later
       int r = RandomNumberGenerator.genRan(setOfNodes.size(), 0);
+      System.out.println(r);
       int ranNode = setOfNodes.remove(r);
       Location locRan = getLocFromLocId(ranNode);
 

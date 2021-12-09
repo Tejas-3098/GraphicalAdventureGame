@@ -25,7 +25,7 @@ public interface Features {
 
   void shoot(KeyEvent e, int d);
 
-  void restart();
+  void restart(String text, String columnsText, String interconnectivityText, String wrappingText, String percentageText, String numOfMonstersText);
 
   void processRows(String text);
 
@@ -40,4 +40,6 @@ public interface Features {
   void processNumOfMons(String text);
 
   void enter(String text, String text1, String text2, String text3, String text4, String text5);
+
+  void clear();
 }
