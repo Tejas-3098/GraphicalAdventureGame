@@ -1,8 +1,14 @@
-package dungeon;
+package dungeonTest;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import dungeon.Dungeon;
+import dungeon.DungeonImpl;
+import dungeon.Location;
+import dungeon.Node;
+import dungeon.RandomNumberGenerator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

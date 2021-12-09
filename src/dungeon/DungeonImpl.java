@@ -8,7 +8,10 @@ import java.util.Objects;
 /**
  * DungeonImpl class contains the most important methods of this project like
  * createZeroConnectivityDungeon, createNConnectivityDungeon, getSetOfEdgesForEachNode
- * which handles wrapping dungeon creation.
+ * which handles wrapping dungeon creation. It takes in the parameters given by the user and creates
+ * a maze by adding random treasures, arrows and monsters that are dangerous and can
+ * kill the player. It also contains various getter methods that are used to get information about
+ * the created dungeon.
  */
 public class DungeonImpl implements Dungeon {
   private final int interconnectivity;
@@ -21,7 +24,6 @@ public class DungeonImpl implements Dungeon {
   ArrayList<ArrayList<Integer>> listOfEdges;
   ArrayList<ArrayList<Integer>> listOfRemEdges = new ArrayList<>();
   ArrayList<Treasure> treasureList = new ArrayList<>();
-  //private int arrowCount = 3;
 
   /**
    * Constructor for DungeonImpl which takes in 6 parameters - rows, columns, interconnectivity,
@@ -332,7 +334,6 @@ public class DungeonImpl implements Dungeon {
   @Override
   public void assignTreasure(int perc) throws IllegalArgumentException {
     //throwing an exception if the percentage is not a valid value
-    System.out.println(perc);
     if (perc > 100 || perc < 0) {
       throw new IllegalArgumentException("Percentage should be between 0 and 100");
     }
@@ -351,7 +352,6 @@ public class DungeonImpl implements Dungeon {
     while (cavesAssigned != numberOfCavesToBeAddedWithTreasure) {
       //int ranNode = setOfDNodes.remove(0); // Will be randomized later
       int r = RandomNumberGenerator.genRan(setOfNodes.size(), 0);
-      System.out.println(r);
       int ranNode = setOfNodes.remove(r);
       Location locRan = getLocFromLocId(ranNode);
 

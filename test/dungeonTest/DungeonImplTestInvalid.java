@@ -1,6 +1,9 @@
-package dungeon;
+package dungeonTest;
 
 import org.junit.Test;
+
+import dungeon.Dungeon;
+import dungeon.DungeonImpl;
 
 /**
  * Test class for DungeonImpl to check if any invalid values of the parameters are passed

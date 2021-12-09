@@ -1,20 +1,21 @@
 package gameview;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
 import dungeon.Location;
 import dungeon.LocationType;
 import dungeon.Node;
 import dungeon.Treasure;
 import dungeon.TreasureI;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 class DungeonPanel extends JPanel {
   private final ReadOnlyDungeonModel dun;
@@ -79,7 +80,7 @@ class DungeonPanel extends JPanel {
           int pid = dun.getPlayer().getPlayerLocId();
           //System.out.println("Player starts at :"+pid);
           Location l = dun.getPlayLocFromLocId(pid);
-          if (node[i][j].getLoc() == l && !dun.getMonsterStatus(pid)) {
+          if (node[i][j].getLoc() == l) {
             try {
               img = ImageIO.read(new File("src/dungeon-images/color-cells/player.jpg"));
             } catch (IOException e) {
@@ -120,10 +121,10 @@ class DungeonPanel extends JPanel {
             g2d.drawString("Smell : No smell, there is no monster nearby!", 10, 100);
           }
           //Displaying the treasure
-          ArrayList<TreasureI> tList = dun.getGame2dDungeon()[i][j].getTreasure();
+          ArrayList<TreasureI> treList = dun.getGame2dDungeon()[i][j].getTreasure();
           //System.out.println(tList);
-          for (int s = 0; s < tList.size(); s++) {
-            if (tList.get(s).getTypeOfTreasure() == Treasure.DIAMOND) {
+          for (int s = 0; s < treList.size(); s++) {
+            if (treList.get(s).getTypeOfTreasure() == Treasure.DIAMOND) {
               try {
                 img = ImageIO.read(new File("src/dungeon-images/diamond.png"));
                 g2d.drawImage(img, x + 60, y + 30, 20, 20, this);
@@ -131,7 +132,7 @@ class DungeonPanel extends JPanel {
                 e.printStackTrace();
               }
 
-            } else if (tList.get(s).getTypeOfTreasure() == Treasure.RUBY) {
+            } else if (treList.get(s).getTypeOfTreasure() == Treasure.RUBY) {
               try {
                 img = ImageIO.read(new File("src/dungeon-images/ruby.png"));
                 g2d.drawImage(img, x + 45, y + 25, 20, 20, this);
@@ -139,7 +140,7 @@ class DungeonPanel extends JPanel {
                 e.printStackTrace();
               }
 
-            } else if (tList.get(s).getTypeOfTreasure() == Treasure.SAPPHIRE) {
+            } else if (treList.get(s).getTypeOfTreasure() == Treasure.SAPPHIRE) {
               try {
                 img = ImageIO.read(new File("src/dungeon-images/emerald.png"));
               } catch (IOException e) {
@@ -162,16 +163,16 @@ class DungeonPanel extends JPanel {
 
           if (dun.getSmell() == 1 && node[i][j].getLoc() == l) {
             try {
-              img = ImageIO.read(new File("src/dungeon-images/" +
-                      "color-cells/smellPungent.jfif"));
+              img = ImageIO.read(new File("src/dungeon-images/"
+                      + "color-cells/smellPungent.jfif"));
             } catch (IOException e) {
               e.printStackTrace();
             }
             g2d.drawImage(img, x + 55, y + 55, 30, 30, this);
           } else if (dun.getSmell() == 2 && node[i][j].getLoc() == l) {
             try {
-              img = ImageIO.read(new File("src/dungeon-images/color-cells/" +
-                      "smellFaint.jfif"));
+              img = ImageIO.read(new File("src/dungeon-images/color-cells/"
+                      + "smellFaint.jfif"));
             } catch (IOException e) {
               e.printStackTrace();
             }

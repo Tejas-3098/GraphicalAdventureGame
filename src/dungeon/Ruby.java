@@ -14,8 +14,4 @@ public class Ruby extends AbstractTreasure {
     return this.typeOfTreasure;
   }
 
-  @Override
-  public int getWeight() {
-    return this.weight;
-  }
 }

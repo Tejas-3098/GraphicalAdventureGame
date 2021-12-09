@@ -22,9 +22,5 @@ public abstract class AbstractTreasure implements TreasureI {
   public Treasure getTypeOfTreasure() {
     return this.typeOfTreasure;
   }
-
-  @Override
-  public int getWeight() {
-    return this.weight;
-  }
 }
+

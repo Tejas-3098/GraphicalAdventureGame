@@ -8,11 +8,7 @@ public class Monster {
   private int health;
 
   public Monster(int health) {
-    this.health = 2;
-  }
-
-  public void setHealth(int h) {
-    this.health = h;
+    this.health = health;
   }
 
   public int getHealth() {

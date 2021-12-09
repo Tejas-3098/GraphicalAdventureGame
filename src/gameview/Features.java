@@ -14,36 +14,69 @@ import java.awt.event.KeyEvent;
  * functionality.
  */
 public interface Features {
-  /**
-   * Exit the program.
-   */
-  void exitProgram();
 
+  /**
+   * When a move related key is pressed, this method is called which moves the player
+   * according to the key pressed.
+   *
+   * @param k the key which is pressed.
+   */
   void move(KeyEvent k);
 
+  /**
+   * When a pickup related key is pressed, this method is called and the player picks up
+   * either treasure or arrow depending on which key is pressed.
+   *
+   * @param k the key which is pressed.
+   */
   void pickup(KeyEvent k);
 
+  /**
+   * When a shoot key is pressed, the player shoots an arrow in the specified direction and
+   * distance.
+   *
+   * @param e the key pressed.
+   * @param d the distance.
+   */
   void shoot(KeyEvent e, int d);
 
-  void restart(String text, String columnsText, String interconnectivityText, String wrappingText, String percentageText, String numOfMonstersText);
+  /**
+   * Used to restart the game with the same parameters.
+   *
+   * @param text rows
+   * @param columnsText columns
+   * @param interconnectivityText interconnectivity
+   * @param wrappingText wrapping
+   * @param percentageText percentage of caves to be added with treasure
+   * @param numOfMonstersText number of monsters
+   */
+  void restart(String text, String columnsText, String interconnectivityText,
+               String wrappingText, String percentageText, String numOfMonstersText);
 
-  void processRows(String text);
-
-  void processCols(String text);
-
-  void processInt(String text);
-
-  void processWrap(String text);
-
-  void processPerc(String text);
-
-  void processNumOfMons(String text);
-
+  /**
+   * Used to clear the values of the input parameters.
+   */
   void clear();
 
+  /**
+   * Used to start the game with the given parameters.
+   *
+   * @param text rows
+   * @param text1 columns
+   * @param text2 interconnectivity
+   * @param text3 wrapping
+   * @param text4 percentage of caves to be added with treasure
+   * @param text5 number of monsters
+   */
   void startGame(String text, String text1, String text2, String text3, String text4, String text5);
 
+  /**
+   * This method ends the game and closes the window and displays an exit code 0.
+   */
   void quitGame();
 
+  /**
+   * This method is used to create a new game.
+   */
   void newGame();
 }

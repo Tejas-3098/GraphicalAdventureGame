@@ -6,7 +6,9 @@ package dungeon;
  */
 public interface TreasureI {
 
+  /**
+   * Returns the type of the treasure that is present at that location.
+   */
   Treasure getTypeOfTreasure();
 
-  int getWeight();
 }

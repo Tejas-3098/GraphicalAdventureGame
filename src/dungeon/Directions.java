@@ -1,7 +1,7 @@
 package dungeon;
 
 /**
- * Enum for Treasures, treasures can be of 3 types - Diamond, Ruby and Sapphire.
+ * Enum for Directions, directions can be North, South, West or East.
  */
 public enum Directions {
   NORTH, SOUTH, EAST, WEST;

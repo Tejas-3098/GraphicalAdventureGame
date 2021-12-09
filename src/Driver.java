@@ -5,8 +5,8 @@ import controller.GuiGameConsoleController;
 import controller.GuiGameController;
 import controller.TextGameConsoleController;
 import dungeon.Game;
-import gameview.dungeonI;
-import gameview.dungeonView;
+import gameview.DungeonI;
+import gameview.DungeonView;
 
 /**
  * Driver class which contains the main method.
@@ -20,7 +20,7 @@ public class Driver {
     String wrap = "";
     if (x.length == 0) {
       Game model = new Game(5,5,8,"no",80,10);
-      dungeonI view = new dungeonView(model);
+      DungeonI view = new DungeonView(model);
       GuiGameController cont = new GuiGameConsoleController(model, view);
       cont.setView(view);
       cont.playGame(model);

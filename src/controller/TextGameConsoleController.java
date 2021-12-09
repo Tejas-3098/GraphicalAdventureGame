@@ -1,19 +1,20 @@
 package controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
 import dungeon.Game;
 import dungeon.Location;
 import dungeon.LocationType;
 import dungeon.Moves;
 import dungeon.Treasure;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
- * Class which implements the controller, takes in readable and appendable and has 2 helper methods
- * and a main playGame method.
+ * Class which represents the text based controller for the game. Each action taken by the model
+ * for example move, pickup and shoot is observed by the controller and the controller displays the
+ * appropriate text message depending on the result of the action taken.
  */
 public class TextGameConsoleController implements TextGameController {
 
@@ -50,7 +51,6 @@ public class TextGameConsoleController implements TextGameController {
       do {
         out.append(getNodeDescription(g, flag));
 
-
         flag = movePickShoot(g);
         //}}
       }
@@ -58,7 +58,6 @@ public class TextGameConsoleController implements TextGameController {
     } catch (IOException ioe) {
       throw new IllegalStateException("Append Failed!", ioe);
     }
-
   }
 
   private boolean movePickShoot(Game g) throws IOException {
@@ -96,7 +95,6 @@ public class TextGameConsoleController implements TextGameController {
         break;
       case "Q":
 
-
       default:
         out.append("Enter one of M,P or S");
     }
@@ -105,7 +103,7 @@ public class TextGameConsoleController implements TextGameController {
 
   private String getNodeDescription(Game g, boolean flag) {
     StringBuilder s = new StringBuilder();
-    ArrayList<Moves> m;
+
     int r = g.getSmell();
     System.out.println(Arrays.deepToString(g.getGame2dDungeon()));
     if (r == 1) {
@@ -143,9 +141,9 @@ public class TextGameConsoleController implements TextGameController {
     if (flag) {
       g.getReachableNodes(pLocId);
     }
+    ArrayList<Moves> m;
     m = g.getGame2dDungeon()[pLoc.getX()][pLoc.getY()].getPossibleMoves();
 
-    //System.out.println(m);
     s.append("\nDoors lead to ");
     for (int i = 0; i < m.size(); i++) {
       s.append(m.get(i));

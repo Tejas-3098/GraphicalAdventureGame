@@ -1,6 +1,7 @@
 package dungeon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The game class is where the game is initialized, the dungeon is created and the player
@@ -14,7 +15,6 @@ public class Game implements GameI {
   private Location startCaveCoordinates;
   private int endCaveLocId;
   private Location endCaveCoordinates;
-  private final boolean gameOver = false;
 
   /**
    * Constructor for the game which takes in 4 parameters rows, columns, interconnectivity
@@ -31,16 +31,9 @@ public class Game implements GameI {
     assignGameTreasure(perc);
     assignArrowsToGame(perc);
 
-    //setStartAndEndCaveToTestIt(12, 1);
     startGame();
-    System.out.println("Start Cave -> " + startCaveLocId + " End Cave -> " + endCaveLocId);
+    //System.out.println("Start Cave -> " + startCaveLocId + " End Cave -> " + endCaveLocId);
     assignMonsterToGame(dungeon2D.getNumberOfMonsters(), startCaveLocId, endCaveLocId);
-    for (int i = 0; i < getRows(); i++) {
-      for (int j = 0; j < columns; j++) {
-        System.out.println(dungeon2D.get2dDungeon()[i][j].getMonster());
-      }
-    }
-
     return dungeon2D.get2dDungeon();
   }
 
@@ -51,15 +44,8 @@ public class Game implements GameI {
     assignGameTreasure(perc);
     assignArrowsToGame(perc);
 
-    //setStartAndEndCaveToTestIt(12, 1);
     startGame();
     assignMonsterToGame(dungeon2D.getNumberOfMonsters(), startCaveLocId, endCaveLocId);
-    for (int i = 0; i < getRows(); i++) {
-      for (int j = 0; j < columns; j++) {
-        System.out.println(dungeon2D.get2dDungeon()[i][j].getMonster());
-      }
-    }
-
     return dungeon2D.get2dDungeon();
   }
 
@@ -84,7 +70,7 @@ public class Game implements GameI {
   }
 
   @Override
-  public ArrayList<Moves> getReachableNodes(int locId) {
+  public List<Moves> getReachableNodes(int locId) {
     return dungeon2D.getNodesReachableFromCurrentNode(locId);
   }
 
@@ -121,7 +107,7 @@ public class Game implements GameI {
       }
     } else if (adjacents.contains(a + 1)) {
       int visLocId = a + 1;
-      Location l1 = dungeon2D.getLocFromLocId(a+1);
+      Location l1 = dungeon2D.getLocFromLocId(a + 1);
       dungeon2D.get2dDungeon()[l1.getX()][l1.getY()].setVisited(visLocId);
       //dungeon2D.get2dDungeon()[currLocOfPlayer.getX()][currLocOfPlayer.getY()].setVisited(a + 1);
       play.setPlayerLocId(a + 1);
@@ -439,7 +425,7 @@ public class Game implements GameI {
   }
 
   @Override
-  public ArrayList<Treasure> getGameTreasure() {
+  public List<Treasure> getGameTreasure() {
     return dungeon2D.getTreasure();
   }
 

@@ -1,8 +1,11 @@
 
-package dungeon;
+package dungeonTest;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dungeon.Game;
+import dungeon.GameI;
 
 import static org.junit.Assert.assertEquals;
 
