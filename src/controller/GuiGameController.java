@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.KeyEvent;
+
 import dungeon.Game;
 import gameview.DungeonI;
 
@@ -23,4 +25,20 @@ public interface GuiGameController {
    * in the model.
    */
   void playGame(Game model) throws IllegalArgumentException;
+
+  /**
+   * When a move related key is pressed, this method is called which moves the player
+   * according to the key pressed.
+   */
+  void move(KeyEvent k);
+
+  /** When a pickup related key is pressed, this method is called and the player picks up
+   * either treasure or arrow depending on which key is pressed.
+   */
+  void pickup(KeyEvent k);
+
+  /** When a shoot key is pressed, the player shoots an arrow in the specified direction and
+   * distance.
+   */
+  void shoot(KeyEvent k, int d);
 }
