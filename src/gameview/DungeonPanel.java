@@ -5,15 +5,15 @@ import dungeon.LocationType;
 import dungeon.Node;
 import dungeon.Treasure;
 import dungeon.TreasureI;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -34,21 +34,21 @@ class DungeonPanel extends JPanel {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
     HashMap<String, String> images = new HashMap<>();
-    images.put("E N S W ", "src/dungeon-images/color-cells/NSEW.png");
-    images.put("E ", "src/dungeon-images/color-cells/E.png");
-    images.put("E W ", "src/dungeon-images/color-cells/EW.png");
-    images.put("N ", "src/dungeon-images/color-cells/N.png");
-    images.put("E N ", "src/dungeon-images/color-cells/NE.png");
-    images.put("E N W ", "src/dungeon-images/color-cells/NEW.png");
-    images.put("N S ", "src/dungeon-images/color-cells/NS.png");
-    images.put("E N S ", "src/dungeon-images/color-cells/NSE.png");
-    images.put("N S W ", "src/dungeon-images/color-cells/NSW.png");
-    images.put("N W ", "src/dungeon-images/color-cells/NW.png");
-    images.put("S ", "src/dungeon-images/color-cells/S.png");
-    images.put("E S ", "src/dungeon-images/color-cells/SE.png");
-    images.put("E S W ", "src/dungeon-images/color-cells/SEW.png");
-    images.put("S W ", "src/dungeon-images/color-cells/SW.png");
-    images.put("W ", "src/dungeon-images/color-cells/W.png");
+    images.put("E N S W ", "/dungeon-images/color-cells/NSEW.png");
+    images.put("E ", "/dungeon-images/color-cells/E.png");
+    images.put("E W ", "/dungeon-images/color-cells/EW.png");
+    images.put("N ", "/dungeon-images/color-cells/N.png");
+    images.put("E N ", "/dungeon-images/color-cells/NE.png");
+    images.put("E N W ", "/dungeon-images/color-cells/NEW.png");
+    images.put("N S ", "/dungeon-images/color-cells/NS.png");
+    images.put("E N S ", "/dungeon-images/color-cells/NSE.png");
+    images.put("N S W ", "/dungeon-images/color-cells/NSW.png");
+    images.put("N W ", "/dungeon-images/color-cells/NW.png");
+    images.put("S ", "/dungeon-images/color-cells/S.png");
+    images.put("E S ", "/dungeon-images/color-cells/SE.png");
+    images.put("E S W ", "/dungeon-images/color-cells/SEW.png");
+    images.put("S W ", "/dungeon-images/color-cells/SW.png");
+    images.put("W ", "/dungeon-images/color-cells/W.png");
 
 
     Node[][] node = dun.getGame2dDungeon();
@@ -61,19 +61,11 @@ class DungeonPanel extends JPanel {
       x = 20;
       for (int j = 0; j < dun.getColumns(); j++) {
         if (!node[i][j].getVisitedStatus()) {
-          try {
-            img = ImageIO.read(new File("src/dungeon-images/blank.png"));
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
+          img = (BufferedImage) this.imageRead("/dungeon-images/blank.png");
           g2d.drawImage(img, x, y, 120, 120, this);
         } else {
           String imageToDraw = images.get(node[i][j].getLocMove());
-          try {
-            img = ImageIO.read(new File(imageToDraw));
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
+          img = (BufferedImage) this.imageRead(imageToDraw);
           g2d.drawImage(img, x, y, 120, 120, this);
 
           //Displaying the player
@@ -81,11 +73,7 @@ class DungeonPanel extends JPanel {
           //System.out.println("Player starts at :"+pid);
           Location l = dun.getPlayLocFromLocId(pid);
           if (node[i][j].getLoc() == l) {
-            try {
-              img = ImageIO.read(new File("src/dungeon-images/color-cells/player.jpg"));
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+            img = (BufferedImage) this.imageRead("/dungeon-images/color-cells/player.jpg");
             g2d.drawImage(img, x + 40, y + 10, 30, 30, this);
           }
 
@@ -125,66 +113,39 @@ class DungeonPanel extends JPanel {
           //System.out.println(tList);
           for (int s = 0; s < treList.size(); s++) {
             if (treList.get(s).getTypeOfTreasure() == Treasure.DIAMOND) {
-              try {
-                img = ImageIO.read(new File("src/dungeon-images/diamond.png"));
-                g2d.drawImage(img, x + 60, y + 30, 20, 20, this);
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
+              img = (BufferedImage) this.imageRead("/dungeon-images/diamond.png");
+              g2d.drawImage(img, x + 60, y + 30, 20, 20, this);
 
             } else if (treList.get(s).getTypeOfTreasure() == Treasure.RUBY) {
-              try {
-                img = ImageIO.read(new File("src/dungeon-images/ruby.png"));
-                g2d.drawImage(img, x + 45, y + 25, 20, 20, this);
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
+              img = (BufferedImage) this.imageRead("/dungeon-images/ruby.png");
+              g2d.drawImage(img, x + 45, y + 25, 20, 20, this);
 
             } else if (treList.get(s).getTypeOfTreasure() == Treasure.SAPPHIRE) {
-              try {
-                img = ImageIO.read(new File("src/dungeon-images/emerald.png"));
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
+              img = (BufferedImage) this.imageRead("/dungeon-images/emerald.png");
               g2d.drawImage(img, x + 52, y + 27, 20, 20, this);
             }
           }
           //Displaying the monster
           if (dun.getMonsterStatus(node[i][j].getLocId())
                   && dun.getGame2dDungeon()[i][j].getMonster().get(0).getHealth() > 0) {
-            try {
-              img = ImageIO.read(new File("src/dungeon-images/otyugh.png"));
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+            img = (BufferedImage) this.imageRead("/dungeon-images/otyugh.png");
             g2d.drawImage(img, x + 25, y + 50, 30, 30, this);
           }
           //Displaying the smell
 
           if (dun.getSmell() == 1 && node[i][j].getLoc() == l) {
-            try {
-              img = ImageIO.read(new File("src/dungeon-images/"
-                      + "color-cells/smellPungent.jfif"));
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+            img = (BufferedImage) this.imageRead("/dungeon-images/"
+                    + "color-cells/smellPungent.jfif");
             g2d.drawImage(img, x + 55, y + 55, 30, 30, this);
           } else if (dun.getSmell() == 2 && node[i][j].getLoc() == l) {
-            try {
-              img = ImageIO.read(new File("src/dungeon-images/color-cells/"
-                      + "smellFaint.jfif"));
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+
+            img = (BufferedImage) this.imageRead("/dungeon-images/color-cells/"
+                    + "smellFaint.jfif");
             g2d.drawImage(img, x + 55, y + 55, 30, 30, this);
           }
           //Displaying the arrows
           if (node[i][j].getArrowStatus()) {
-            try {
-              img = ImageIO.read(new File("src/dungeon-images/color-cells/arrow.png"));
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
+            img = (BufferedImage) this.imageRead("/dungeon-images/color-cells/arrow.png");
             g2d.drawImage(img, x + 70, y + 25, 15, 15, this);
           }
         }
@@ -194,5 +155,14 @@ class DungeonPanel extends JPanel {
       y = y + 120;
     }
 
+  }
+
+  private Image imageRead(String filePath) {
+    try {
+      InputStream imageStream = getClass().getResourceAsStream(filePath);
+      return ImageIO.read(imageStream);
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot find base location image!");
+    }
   }
 }

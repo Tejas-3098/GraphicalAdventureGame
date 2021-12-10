@@ -33,7 +33,7 @@ public class DungeonImpl implements Dungeon {
           throws IllegalArgumentException {
     if (rows < 0 || rows > 100 || columns < 0 || columns > 100 || interconnectivity < 0
             || (!wrapping.equalsIgnoreCase("YES")
-            && !wrapping.equalsIgnoreCase("NO"))) {
+            && !wrapping.equalsIgnoreCase("NO")) || perc > 100 || perc < 0 || n < 1) {
       throw new IllegalArgumentException("Invalid values provided!");
     }
     this.rows = rows;

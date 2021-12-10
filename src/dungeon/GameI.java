@@ -1,7 +1,6 @@
 package dungeon;
 
 import gameview.ReadOnlyDungeonModel;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

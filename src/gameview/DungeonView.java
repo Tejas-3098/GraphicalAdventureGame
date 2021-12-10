@@ -1,11 +1,15 @@
 package gameview;
 
 import controller.GuiGameConsoleController;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
+
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -129,7 +133,6 @@ public class DungeonView extends JFrame implements DungeonI {
     //makeVisible();
   }
 
-
   @Override
   public void setFeatures(Features f) {
 
@@ -145,7 +148,7 @@ public class DungeonView extends JFrame implements DungeonI {
     this.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {
-
+        //As there is no action performed when a key is typed, this method is empty.
       }
 
       @Override
@@ -165,7 +168,7 @@ public class DungeonView extends JFrame implements DungeonI {
 
       @Override
       public void keyReleased(KeyEvent e) {
-
+        //As there is no action performed when a key is released, this method is empty.
       }
 
     });
@@ -245,6 +248,7 @@ public class DungeonView extends JFrame implements DungeonI {
 
   @Override
   public void addClickListener(GuiGameConsoleController guiGameConsoleController) {
+    //empty method as no use yet.
   }
 
   @Override

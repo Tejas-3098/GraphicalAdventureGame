@@ -478,6 +478,7 @@ public class Game implements GameI {
 
   @Override
   public void setWrapping(String s) {
+    String wrap = s;
   }
 
   @Override
