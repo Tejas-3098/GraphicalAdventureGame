@@ -86,20 +86,20 @@ public class GuiGameConsoleController implements GuiGameController, Features {
     String s = "";
     if (k.getKeyCode() == 'W') {
       s = model.shootArrow(Directions.NORTH, d);
-      System.out.println("Arrow shot towards N!");
-      System.out.println(s);
+      //System.out.println("Arrow shot towards N!");
+      //System.out.println(s);
     } else if (k.getKeyCode() == 'S') {
       s = model.shootArrow(Directions.SOUTH, d);
-      System.out.println("Arrow shot towards S!");
-      System.out.println(s);
+      //System.out.println("Arrow shot towards S!");
+      //System.out.println(s);
     } else if (k.getKeyCode() == 'A') {
       s = model.shootArrow(Directions.WEST, d);
-      System.out.println("Arrow shot towards W!");
-      System.out.println(s);
+      //System.out.println("Arrow shot towards W!");
+      //System.out.println(s);
     } else if (k.getKeyCode() == 'D') {
       s = model.shootArrow(Directions.EAST, d);
-      System.out.println("Arrow shot towards E!");
-      System.out.println(s);
+      //System.out.println("Arrow shot towards E!");
+      //System.out.println(s);
     }
     if (Objects.equals(s, "Monster injured")) {
       view.showResult("injured");
